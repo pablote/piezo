@@ -1,6 +1,9 @@
 package com.lucidchart.piezo.admin.util
 
+import org.specs2.execute.AnyValueAsResult
 import org.specs2.mutable._
+import play.api.test.FakeApplication
+import play.api.test.Helpers._
 import scala.collection.JavaConverters._
 import java.io.{PrintWriter, StringWriter}
 import scala.util.Random
@@ -30,13 +33,17 @@ class DummyClassGeneratorTest extends Specification{
 
   "generator" should {
     "create dummy class" in {
-      val dummyClassGenerator = new DummyClassGenerator()
-      //TODO: figure out why it won't load
-//      val dummyClass: Option[Class[_]] = dummyClassGenerator.generate(className, writer.toString)
-//      val dummyMethod = dummyClass.get.getDeclaredMethod(methodName, classOf[java.lang.Integer])
-//      val echoParameter = random.nextInt()
-//      val result = dummyMethod.invoke(null, echoParameter: java.lang.Integer)
-//      result must equalTo(echoParameter)
+      running(FakeApplication(additionalConfiguration = Map())) {
+        new AnyValueAsResult().asResult({
+          val dummyClassGenerator = new DummyClassGenerator()
+          //TODO: figure out why it won't load
+          //      val dummyClass: Option[Class[_]] = dummyClassGenerator.generate(className, writer.toString)
+          //      val dummyMethod = dummyClass.get.getDeclaredMethod(methodName, classOf[java.lang.Integer])
+          //      val echoParameter = random.nextInt()
+          //      val result = dummyMethod.invoke(null, echoParameter: java.lang.Integer)
+          //      result must equalTo(echoParameter)
+        })
+      }
     }
   }
 }

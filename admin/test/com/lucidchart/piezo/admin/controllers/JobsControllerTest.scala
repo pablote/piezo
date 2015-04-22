@@ -1,5 +1,6 @@
 package com.lucidchart.piezo.admin.controllers
 
+import org.specs2.execute.AnyValueAsResult
 import org.specs2.mutable._
 
 import play.api.test._
@@ -24,19 +25,23 @@ class JobsControllerTest extends Specification {
 
   "Jobs" should {
     "create dummy job class" in {
-      //TODO: figure out how to set the classpath in a test
-//      val rootPackageClassName = "foo"
-//      val rootPackageClassSource = Jobs.getDummyJobSource(rootPackageClassName)
-//      val dummyClassGenerator = new DummyClassGenerator()
-//      val rootPackageDummyClass: Option[Class[_]] = dummyClassGenerator.generate(rootPackageClassName, rootPackageClassSource)
-//      rootPackageDummyClass.get.getName() must equalTo(rootPackageClassName)
-//      rootPackageDummyClass.get.getInterfaces.contains(classOf[Job]) must beTrue
+      running(FakeApplication(additionalConfiguration = Map())) {
+        new AnyValueAsResult().asResult({
+          //TODO: figure out how to set the classpath in a test
+          //      val rootPackageClassName = "foo"
+          //      val rootPackageClassSource = Jobs.getDummyJobSource(rootPackageClassName)
+          //      val dummyClassGenerator = new DummyClassGenerator()
+          //      val rootPackageDummyClass: Option[Class[_]] = dummyClassGenerator.generate(rootPackageClassName, rootPackageClassSource)
+          //      rootPackageDummyClass.get.getName() must equalTo(rootPackageClassName)
+          //      rootPackageDummyClass.get.getInterfaces.contains(classOf[Job]) must beTrue
 
-//      val nonRootPackageClassName = "bar.foo"
-//      val nonRootPackageClassSource = Jobs.getDummyJobSource(nonRootPackageClassName)
-//      val dummyClassGenerator2 = new DummyClassGenerator()
-//      val nonRootPackageDummyClass: Option[Class[_]] = dummyClassGenerator2.generate(nonRootPackageClassName, nonRootPackageClassSource)
-//      nonRootPackageDummyClass.get.getName() must equalTo(nonRootPackageClassName)
+          //      val nonRootPackageClassName = "bar.foo"
+          //      val nonRootPackageClassSource = Jobs.getDummyJobSource(nonRootPackageClassName)
+          //      val dummyClassGenerator2 = new DummyClassGenerator()
+          //      val nonRootPackageDummyClass: Option[Class[_]] = dummyClassGenerator2.generate(nonRootPackageClassName, nonRootPackageClassSource)
+          //      nonRootPackageDummyClass.get.getName() must equalTo(nonRootPackageClassName)
+        })
+      }
     }
   }
 }

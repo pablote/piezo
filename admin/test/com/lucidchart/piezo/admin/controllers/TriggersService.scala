@@ -10,6 +10,8 @@ import TestUtil._
 import java.util.Properties
 import play.api.mvc.{AnyContentAsEmpty, Result}
 
+import scala.concurrent.Future
+
 /**
   * Add your spec here.
   * You can mock out a whole application including requests, plugins etc.
@@ -29,7 +31,7 @@ class TriggersService extends Specification {
 
          val triggersController = new Triggers(schedulerFactory)
          val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, "/jobs/missinggroup/missingname")
-         val missingTrigger: Result = triggersController.getTrigger("missinggroup", "missingname")(request)
+         val missingTrigger: Future[Result] = triggersController.getTrigger("missinggroup", "missingname")(request)
 
          status(missingTrigger) must equalTo(NOT_FOUND)
          contentType(missingTrigger) must beSome.which(_ == "text/html")
@@ -49,7 +51,7 @@ class TriggersService extends Specification {
        running(FakeApplication()) {
          val triggersController = new Triggers(schedulerFactory)
          val request: FakeRequest[AnyContentAsEmpty.type] = FakeRequest(GET, "/jobs/" + jobGroup + "/" + jobName)
-         val validTrigger: Result = triggersController.getTrigger(triggerGroup, triggerName)(request)
+         val validTrigger: Future[Result] = triggersController.getTrigger(triggerGroup, triggerName)(request)
 
          status(validTrigger) must equalTo(OK)
          contentType(validTrigger) must beSome.which(_ == "text/html")
