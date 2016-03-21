@@ -18,7 +18,6 @@ mainClass := Some("com.lucidchart.piezo.Worker")
 
 libraryDependencies ++= Seq(
 	"ch.qos.logback" % "logback-classic" % "1.0.7",
-  "net.databinder" %% "dispatch-http" % "0.8.10",
 	"org.quartz-scheduler" % "quartz" % "2.1.7",
   "org.specs2" %% "specs2" % "2.3.13" % Test,
 	"mysql" % "mysql-connector-java" % "5.1.25",

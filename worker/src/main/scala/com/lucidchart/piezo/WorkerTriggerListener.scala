@@ -21,7 +21,6 @@ class WorkerTriggerListener(props: Properties) extends TriggerListener {
     try {
       triggerHistoryModel.addTrigger(trigger, Some(context.getFireTime), misfire=false, Some(context.getFireInstanceId))
       val statsKey = "triggers." + trigger.getKey.getGroup + "." + trigger.getKey.getName + ".completed"
-      StatsD.increment(statsKey)
     } catch {
       case e: Exception => WorkerTriggerListener.logger.error("exception in triggerComplete", e)
     }
@@ -31,7 +30,6 @@ class WorkerTriggerListener(props: Properties) extends TriggerListener {
     try {
       triggerHistoryModel.addTrigger(trigger, None, misfire=true, None)
       val statsKey = "triggers." + trigger.getKey.getGroup + "." + trigger.getKey.getName + ".misfired"
-      StatsD.increment(statsKey)
     } catch {
       case e: Exception => WorkerTriggerListener.logger.error("exception in triggerMisfired", e)
     }
